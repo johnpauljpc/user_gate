@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_spectacular',
 
     # Local apps
     'users'
@@ -137,7 +138,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     
 }
 
@@ -145,4 +147,12 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1)
 
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'User Gate API',
+    'DESCRIPTION': 'A User Authentication System that allows users to register, login and view their profile',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+   
 }

@@ -3,6 +3,7 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from drf_spectacular.utils import extend_schema
 
 from .models import CustomUser
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
@@ -10,7 +11,9 @@ from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
+
 class LoginView(APIView):
+    @extend_schema(request=LoginSerializer)
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
